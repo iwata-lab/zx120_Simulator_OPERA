@@ -85585,6 +85585,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1655815658}
+  - component: {fileID: 1655815659}
   m_Layer: 0
   m_Name: ControllerWithKeyboard
   m_TagString: Untagged
@@ -85607,6 +85608,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1655815659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655815657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30dde94fcbf5af748a89aa3ab5dd4fbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boomTopic: zx120/boom/cmd
+  swingTopic: zx120/swing/cmd
+  armTopic: zx120/arm/cmd
+  bucketTopic: zx120/bucket/cmd
+  tracksTopic: zx120/tracks/cmd_vel
 --- !u!43 &1660221740
 Mesh:
   m_ObjectHideFlags: 0
@@ -118119,7 +118137,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4888405055538717370}
-  - component: {fileID: 4888405055538717371}
   m_Layer: 0
   m_Name: SafetyCones
   m_TagString: Untagged
@@ -124730,23 +124747,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4888405055538717371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 166257866899971118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30dde94fcbf5af748a89aa3ab5dd4fbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boomTopic: zx120/boom/cmd
-  swingTopic: zx120/swing/cmd
-  armTopic: zx120/arm/cmd
-  bucketTopic: zx120/bucket/cmd
-  tracksTopic: zx120/tracks/cmd_vel
 --- !u!64 &4897334071450774058
 MeshCollider:
   m_ObjectHideFlags: 0
