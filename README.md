@@ -1,5 +1,4 @@
 # Simulator on Unity + PhysX communicating with ROS
-# Simulator on Unity + PhysX communicating with ROS
 
 これは,Unity と PhysX を使用し,ROS と通信する建設機械シミュレータです.
 
