@@ -12,6 +12,9 @@ public class JointPosController : MonoBehaviour
     private ArticulationBody joint;
     private Float64Msg targetPos;
 
+    public int stiffness = 200000;
+    public int damping = 100000;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,9 +26,9 @@ public class JointPosController : MonoBehaviour
         {
             var drive = joint.xDrive;
             if (drive.stiffness == 0)
-                drive.stiffness = 200000;
+                drive.stiffness = stiffness;
             if (drive.damping == 0)
-                drive.damping = 100000;
+                drive.damping = damping;
             if (drive.forceLimit == 0)
                 drive.forceLimit = 100000;
             joint.xDrive = drive;
@@ -45,6 +48,6 @@ public class JointPosController : MonoBehaviour
         var drive = joint.xDrive;
         drive.target = (float)(targetPos.data * Mathf.Rad2Deg);
         joint.xDrive = drive;
-        Debug.Log("Joint Target Position:" + targetPos.data);
+        //Debug.Log("Joint Target Position:" + targetPos.data);
     }
 }

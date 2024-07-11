@@ -15744,7 +15744,7 @@ ArticulationBody:
   m_Enabled: 1
   serializedVersion: 5
   m_Mass: 250
-  m_ParentAnchorPosition: {x: 0.15999985, y: 0.781, z: 0.13999942}
+  m_ParentAnchorPosition: {x: 0.15999985, y: 0.781, z: 0.1399999}
   m_ParentAnchorRotation: {x: 0.7071069, y: 0, z: 0, w: 0.7071069}
   m_AnchorPosition: {x: 0, y: 0, z: 0}
   m_AnchorRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -15827,6 +15827,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   setpointTopicName: zx120/boom/cmd
   initTargetPos: -0.8
+  stiffness: 2000000
+  damping: 100000
 --- !u!1 &302559177
 GameObject:
   m_ObjectHideFlags: 0
@@ -20280,7 +20282,7 @@ ArticulationBody:
   m_Enabled: 1
   serializedVersion: 5
   m_Mass: 250
-  m_ParentAnchorPosition: {x: 0.0000003427267, y: 4.600003, z: 0}
+  m_ParentAnchorPosition: {x: -0.0000006109476, y: 4.600003, z: 0}
   m_ParentAnchorRotation: {x: 0, y: 0, z: 0, w: 1.0000002}
   m_AnchorPosition: {x: 0, y: 0, z: 0}
   m_AnchorRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -20363,6 +20365,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   setpointTopicName: zx120/arm/cmd
   initTargetPos: 2
+  stiffness: 2000000
+  damping: 100000
 --- !u!1 &372544705
 GameObject:
   m_ObjectHideFlags: 0
@@ -44054,6 +44058,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   setpointTopicName: zx120/swing/cmd
   initTargetPos: 0
+  stiffness: 2000000
+  damping: 100000
 --- !u!1 &821589831
 GameObject:
   m_ObjectHideFlags: 0
@@ -81267,7 +81273,7 @@ ArticulationBody:
   m_Enabled: 1
   serializedVersion: 5
   m_Mass: 100
-  m_ParentAnchorPosition: {x: -0.00000013411045, y: 2.5190084, z: 0}
+  m_ParentAnchorPosition: {x: -0.0000010877848, y: 2.519008, z: 0}
   m_ParentAnchorRotation: {x: 0, y: 0, z: 0, w: 1.0000002}
   m_AnchorPosition: {x: 0, y: 0, z: 0}
   m_AnchorRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -81404,6 +81410,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   setpointTopicName: zx120/bucket/cmd
   initTargetPos: 0.8
+  stiffness: 2000000
+  damping: 100000
 --- !u!1 &1580853631
 GameObject:
   m_ObjectHideFlags: 0
@@ -83749,7 +83757,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1618948501}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -25.42, y: 0.415, z: 10.03}
+  m_LocalPosition: {x: -4.7, y: 0.415, z: -24.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -86799,6 +86807,7 @@ GameObject:
   - component: {fileID: 1679458190}
   - component: {fileID: 1679458189}
   - component: {fileID: 1679458192}
+  - component: {fileID: 1679458193}
   m_Layer: 0
   m_Name: base_link
   m_TagString: Untagged
@@ -86907,7 +86916,7 @@ ArticulationBody:
   m_ImplicitTensor: 1
   m_Immovable: 0
   m_UseGravity: 1
-  m_CollisionDetectionMode: 0
+  m_CollisionDetectionMode: 1
 --- !u!114 &1679458191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86936,6 +86945,18 @@ MonoBehaviour:
   robotName: zx120
   topicName: zx120/base_link/pose
   publishMessageInterval: 0.05
+--- !u!114 &1679458193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679458187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a05d676966f09c45a37369a143d6a52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1679540523 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1917410729071824, guid: f027f37a9d1d9be41834223199c17fa3, type: 3}
@@ -100249,7 +100270,7 @@ ArticulationBody:
   m_Enabled: 1
   serializedVersion: 5
   m_Mass: 1
-  m_ParentAnchorPosition: {x: -0.00000013411045, y: 0.0000042915344, z: 0}
+  m_ParentAnchorPosition: {x: -0.0000010877848, y: 0.0000038146973, z: 0}
   m_ParentAnchorRotation: {x: 0.27059808, y: -0.27059808, z: 0.6532817, w: 0.6532817}
   m_AnchorPosition: {x: 0, y: 0, z: 0}
   m_AnchorRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
@@ -116165,7 +116186,7 @@ ArticulationBody:
   m_Enabled: 1
   serializedVersion: 5
   m_Mass: 0.001
-  m_ParentAnchorPosition: {x: -0.00000013411045, y: 1.2300074, z: 0}
+  m_ParentAnchorPosition: {x: -0.0000010877848, y: 1.2300074, z: 0}
   m_ParentAnchorRotation: {x: 0.29883635, y: 0.64085656, z: 0.29883635, w: 0.64085656}
   m_AnchorPosition: {x: 0, y: 0, z: 0}
   m_AnchorRotation: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
