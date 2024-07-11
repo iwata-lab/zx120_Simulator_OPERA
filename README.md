@@ -4,10 +4,9 @@
 
 ## 概要
 
-このシミュレータは,[土木研究所](https://www.pwri.go.jp/)が提供する[OPERA（Open Platform for Engineering Resources of Applications）](https://github.com/PWRIEarthquakeLab/OPERA)をベースにしています.OPERAは,建設機械の自動化・自律化のための研究開発プラットフォームだよ.
+このシミュレータは,[土木研究所](https://www.pwri.go.jp/)が提供する[OPERA（Open Platform for Engineering Resources of Applications）](https://www.pwri.go.jp/team/advanced/opera.html)をベースにしています.OPERAは,建設機械の自動化・自律化のための研究開発プラットフォームだよ.
 
-- OPERA GitHubリポジトリ: [https://github.com/PWRIEarthquakeLab/OPERA](https://github.com/PWRIEarthquakeLab/OPERA)
-- OPERAについての詳細: [https://www.pwri.go.jp/team/advanced-technology/jp/about/opera.html](https://www.pwri.go.jp/team/advanced-technology/jp/about/opera.html)
+- OPERA GitHubリポジトリ: [https://github.com/PWRIEarthquakeLab/OPERA](https://github.com/pwri-opera)
 
 ## 特徴
 
