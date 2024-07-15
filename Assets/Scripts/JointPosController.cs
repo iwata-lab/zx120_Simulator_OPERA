@@ -31,14 +31,16 @@ public class JointPosController : MonoBehaviour
                 drive.damping = damping;
             if (drive.forceLimit == 0)
                 drive.forceLimit = 100000;
+            targetPos.data = initTargetPos;
+            drive.target = (float)(targetPos.data * Mathf.Rad2Deg);
             joint.xDrive = drive;
+            Debug.Log("drive : "+drive.target);
         }
         else
         {
             Debug.Log("No ArticulationBody are found");
         }
 
-        targetPos.data = initTargetPos;
         ros.Subscribe<Float64Msg>(setpointTopicName, ExecuteJointPosControl);
     }
 
