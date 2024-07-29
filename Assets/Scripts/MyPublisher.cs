@@ -58,6 +58,9 @@ public class MyPublisher : MonoBehaviour
         ros.Publish(boomTopic, boomMsg);
         ros.Publish(swingTopic, swingMsg);
         ros.Publish(armTopic, armMsg);
+
+        GameObject box = GameObject.Find("zx120/base_link/Collisions/unnamed/Box");
+        box.SetActive(true);
     }
 
     void Update()
