@@ -38,6 +38,9 @@ public class MyPublisher : MonoBehaviour
     public string bucketTopic = "zx120/bucket/cmd";
     public string tracksTopic = "zx120/tracks/cmd_vel";
 
+    public bool isKeyboardControl = false;
+    public bool isControllerControl = false;
+
     Float64Msg boomMsg = new Float64Msg() { data = -0.70f };
     Float64Msg swingMsg = new Float64Msg() { data = 0.0f };
     Float64Msg armMsg = new Float64Msg() { data = 1.57f };
@@ -71,43 +74,8 @@ public class MyPublisher : MonoBehaviour
         bucketDirection = 0.0f;
         (leftWheel, rightWheel) = (0.0f, 0.0f);
 
-        if (Input.GetKey("i") ^ Input.GetKey("k"))
-        {
-            if (Input.GetKey("i")) boomDirection = 1.0f;
-            else if (Input.GetKey("k")) boomDirection = -1.0f;
-        }
-
-        if (Input.GetKey("d") ^ Input.GetKey("e"))
-        {
-            if (Input.GetKey("d")) swingDirection = 1.0f;
-            else if (Input.GetKey("e")) swingDirection = -1.0f;
-        }
-
-        if (Input.GetKey("f") ^ Input.GetKey("s"))
-        {
-            if (Input.GetKey("f")) armDirection = 1.0f;
-            else if (Input.GetKey("s")) armDirection = -1.0f;
-        }
-
-
-        if (Input.GetKey("j") ^ Input.GetKey("l"))
-        {
-            if (Input.GetKey("j")) bucketDirection = 1.0f;
-            else if (Input.GetKey("l")) bucketDirection = -1.0f;
-        }
-
-        if (Input.GetKey("t") ^ Input.GetKey("g"))
-        {
-            if (Input.GetKey("t")) leftWheel = 1.0f;
-            else if (Input.GetKey("g")) leftWheel = -1.0f;
-        }
-
-        if (Input.GetKey("y") ^ Input.GetKey("h"))
-        {
-            if (Input.GetKey("y")) rightWheel = 1.0f;
-            else if (Input.GetKey("h")) rightWheel = -1.0f;
-        }
-
+        if (isKeyboardControl) InputKeys();
+        if (isControllerControl) InputControllers();
         UpdateAndPublishMessages();
 
     }
@@ -146,5 +114,55 @@ public class MyPublisher : MonoBehaviour
         tracksMsg.angular.z = rotationVelocity * (rightWheel - leftWheel);
         ros.Publish(tracksTopic, tracksMsg);
 
+    }
+
+    void InputKeys()
+    {
+        if (Input.GetKey("i") ^ Input.GetKey("k"))
+        {
+            if (Input.GetKey("i")) boomDirection = 1.0f;
+            else if (Input.GetKey("k")) boomDirection = -1.0f;
+        }
+
+        if (Input.GetKey("d") ^ Input.GetKey("e"))
+        {
+            if (Input.GetKey("d")) swingDirection = 1.0f;
+            else if (Input.GetKey("e")) swingDirection = -1.0f;
+        }
+
+        if (Input.GetKey("f") ^ Input.GetKey("s"))
+        {
+            if (Input.GetKey("f")) armDirection = 1.0f;
+            else if (Input.GetKey("s")) armDirection = -1.0f;
+        }
+
+
+        if (Input.GetKey("j") ^ Input.GetKey("l"))
+        {
+            if (Input.GetKey("j")) bucketDirection = 1.0f;
+            else if (Input.GetKey("l")) bucketDirection = -1.0f;
+        }
+
+        if (Input.GetKey("t") ^ Input.GetKey("g"))
+        {
+            if (Input.GetKey("t")) leftWheel = 1.0f;
+            else if (Input.GetKey("g")) leftWheel = -1.0f;
+        }
+
+        if (Input.GetKey("y") ^ Input.GetKey("h"))
+        {
+            if (Input.GetKey("y")) rightWheel = 1.0f;
+            else if (Input.GetKey("h")) rightWheel = -1.0f;
+        }
+    }
+
+    void InputControllers()
+    {
+        boomDirection = Input.GetAxis("Joystick3Vertical");
+        swingDirection = Input.GetAxis("Joystick2Vertical");
+        armDirection = Input.GetAxis("Joystick2Horizontal");
+        bucketDirection = Input.GetAxis("Joystick3Horizontal");
+        leftWheel = Input.GetAxis("Joystick1Vertical1");
+        rightWheel = Input.GetAxis("Joystick1Vertical2");
     }
 }
