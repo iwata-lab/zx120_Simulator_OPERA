@@ -34,6 +34,8 @@ public class SoilParticleSettings : MonoBehaviour
 
     private float[,] originalHeights;
 
+    public MeshCollider targetCollider;
+
     private void Awake()
     {
         if (instance == null)
@@ -103,6 +105,8 @@ public class SoilParticleSettings : MonoBehaviour
         cs.SetTexture(thermalKernelIdx, "Sediment", sedimentRT);
 
         timeElapsed = 0.0f;
+
+        targetCollider.enabled = enable;
     }
 
     void OnApplicationQuit()

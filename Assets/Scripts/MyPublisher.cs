@@ -16,10 +16,21 @@ public class MyPublisher : MonoBehaviour
     private float bucketIncreaseCoefficient = 0.991f;
     private float bucketDecreaseCoefficient = 0.802f;
 
+    private float boomUpperLimit = Mathf.Deg2Rad * 44.0f;
+    private float boomLowerLimit = Mathf.Deg2Rad * -70.0f;
+    private float armUpperLimit = Mathf.Deg2Rad * 152.0f;
+    private float armLowerLimit = Mathf.Deg2Rad * 30.0f;
+    private float bucketUpperLimit = Mathf.Deg2Rad * 143.0f;
+    private float bucketLowerLimit = Mathf.Deg2Rad * -33f;
+
+    private float boomDirection = 0.0f;
+    private float swingDirection = 0.0f;
+    private float armDirection = 0.0f;
+    private float bucketDirection = 0.0f;
     private float leftWheel = 0.0f;
     private float rightWheel = 0.0f;
-    private float translationVelocity = 1.714f;
-    private float rotationVelocity = 1.0f;
+    private float translationVelocity = 2.5f;
+    private float rotationVelocity = 2.0f;
 
     public string boomTopic = "zx120/boom/cmd";
     public string swingTopic = "zx120/swing/cmd";
@@ -27,10 +38,13 @@ public class MyPublisher : MonoBehaviour
     public string bucketTopic = "zx120/bucket/cmd";
     public string tracksTopic = "zx120/tracks/cmd_vel";
 
-    Float64Msg boomMsg = new Float64Msg() { data = -0.8f };
+    public bool isKeyboardControl = false;
+    public bool isControllerControl = false;
+
+    Float64Msg boomMsg = new Float64Msg() { data = -0.70f };
     Float64Msg swingMsg = new Float64Msg() { data = 0.0f };
-    Float64Msg armMsg = new Float64Msg() { data = 2.0f };
-    Float64Msg bucketMsg = new Float64Msg() { data = 0.8f };
+    Float64Msg armMsg = new Float64Msg() { data = 1.57f };
+    Float64Msg bucketMsg = new Float64Msg() { data = 0.79f };
     TwistMsg tracksMsg = new TwistMsg();
 
     void Start()
@@ -42,66 +56,113 @@ public class MyPublisher : MonoBehaviour
         ros.RegisterPublisher<Float64Msg>(armTopic);
         ros.RegisterPublisher<Float64Msg>(bucketTopic);
         ros.RegisterPublisher<TwistMsg>(tracksTopic);
+
+        ros.Publish(boomTopic, boomMsg);
+        ros.Publish(boomTopic, boomMsg);
+        ros.Publish(swingTopic, swingMsg);
+        ros.Publish(armTopic, armMsg);
+
+        GameObject box = GameObject.Find("zx120/base_link/Collisions/unnamed/Box");
+        box.SetActive(true);
     }
 
     void Update()
     {
+        boomDirection = 0.0f;
+        swingDirection = 0.0f;
+        armDirection = 0.0f;
+        bucketDirection = 0.0f;
         (leftWheel, rightWheel) = (0.0f, 0.0f);
-        if (Input.GetKey("i"))
+
+        if (isKeyboardControl) InputKeys();
+        if (isControllerControl) InputControllers();
+        UpdateAndPublishMessages();
+
+    }
+
+    void UpdateAndPublishMessages()
+    {
+        if (boomDirection != 0)
         {
-            boomMsg.data += boomIncreaseCoefficient * Time.deltaTime;
+            boomMsg.data += boomDirection * boomIncreaseCoefficient * Time.deltaTime;
+            boomMsg.data = (float)Mathf.Clamp((float)boomMsg.data, boomLowerLimit, boomUpperLimit);
             ros.Publish(boomTopic, boomMsg);
         }
 
-        if (Input.GetKey("k"))
+        if (swingDirection != 0)
         {
-            boomMsg.data -= boomDecreaseCoefficient * Time.deltaTime;
-            ros.Publish(boomTopic, boomMsg);
-        }
-
-        if (Input.GetKey("d"))
-        {
-            swingMsg.data += swingCoefficient * Time.deltaTime;
+            swingMsg.data += swingDirection * swingCoefficient * Time.deltaTime;
             ros.Publish(swingTopic, swingMsg);
         }
 
-        if (Input.GetKey("e"))
+        if (armDirection != 0)
         {
-            swingMsg.data -= swingCoefficient * Time.deltaTime;
-            ros.Publish(swingTopic, swingMsg);
-        }
-
-        if (Input.GetKey("f"))
-        {
-            armMsg.data += armIncreaseCoefficient * Time.deltaTime;
+            armMsg.data += armDirection * armIncreaseCoefficient * Time.deltaTime;
+            armMsg.data = (float)Mathf.Clamp((float)armMsg.data, armLowerLimit, armUpperLimit);
             ros.Publish(armTopic, armMsg);
         }
 
-        if (Input.GetKey("s"))
+        if (bucketDirection != 0)
         {
-            armMsg.data -= armDecreaseCoefficient * Time.deltaTime;
-            ros.Publish(armTopic, armMsg);
-        }
-
-        if (Input.GetKey("j"))
-        {
-            bucketMsg.data += bucketIncreaseCoefficient * Time.deltaTime;
+            bucketMsg.data += bucketDirection * bucketIncreaseCoefficient * Time.deltaTime;
+            bucketMsg.data = (float)Mathf.Clamp((float)bucketMsg.data, bucketLowerLimit, bucketUpperLimit);
             ros.Publish(bucketTopic, bucketMsg);
         }
 
-        if (Input.GetKey("l"))
-        {
-            bucketMsg.data -= bucketDecreaseCoefficient * Time.deltaTime;
-            ros.Publish(bucketTopic, bucketMsg);
-        }
-
-        if (Input.GetKey("t")) leftWheel=1.0f;
-        if(Input.GetKey("g")) leftWheel=-1.0f;
-        if(Input.GetKey("y")) rightWheel=1.0f;
-        if(Input.GetKey("h")) rightWheel=-1.0f;
 
         tracksMsg.linear.x = translationVelocity * (leftWheel + rightWheel) / 2.0f;
         tracksMsg.angular.z = rotationVelocity * (rightWheel - leftWheel);
         ros.Publish(tracksTopic, tracksMsg);
+
+    }
+
+    void InputKeys()
+    {
+        if (Input.GetKey("i") ^ Input.GetKey("k"))
+        {
+            if (Input.GetKey("i")) boomDirection = 1.0f;
+            else if (Input.GetKey("k")) boomDirection = -1.0f;
+        }
+
+        if (Input.GetKey("d") ^ Input.GetKey("e"))
+        {
+            if (Input.GetKey("d")) swingDirection = 1.0f;
+            else if (Input.GetKey("e")) swingDirection = -1.0f;
+        }
+
+        if (Input.GetKey("f") ^ Input.GetKey("s"))
+        {
+            if (Input.GetKey("f")) armDirection = 1.0f;
+            else if (Input.GetKey("s")) armDirection = -1.0f;
+        }
+
+
+        if (Input.GetKey("j") ^ Input.GetKey("l"))
+        {
+            if (Input.GetKey("j")) bucketDirection = 1.0f;
+            else if (Input.GetKey("l")) bucketDirection = -1.0f;
+        }
+
+        if (Input.GetKey("t") ^ Input.GetKey("g"))
+        {
+            if (Input.GetKey("t")) leftWheel = 1.0f;
+            else if (Input.GetKey("g")) leftWheel = -1.0f;
+        }
+
+        if (Input.GetKey("y") ^ Input.GetKey("h"))
+        {
+            if (Input.GetKey("y")) rightWheel = 1.0f;
+            else if (Input.GetKey("h")) rightWheel = -1.0f;
+        }
+    }
+
+    void InputControllers()
+    {
+        boomDirection = Input.GetAxis("Joystick3Vertical");
+        swingDirection = Input.GetAxis("Joystick2Vertical");
+        armDirection = Input.GetAxis("Joystick2Horizontal");
+        bucketDirection = Input.GetAxis("Joystick3Horizontal");
+        leftWheel = Input.GetAxis("Joystick1Vertical1");
+        rightWheel = Input.GetAxis("Joystick1Vertical2");
     }
 }
