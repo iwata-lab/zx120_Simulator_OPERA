@@ -28,8 +28,8 @@ public class RightJoystickControlledImage : MonoBehaviour
 
     void Update()
     {
-        float backetState = Input.GetAxis(joystickHorizontalAxis);
-        float boomState = Input.GetAxis(joystickVerticalAxis);
+        float backetState = zx120Controller.bucketDirection;
+        float boomState = zx120Controller.boomDirection;
         Vector2 offset;
 
         if (Math.Pow(backetState, 2) + Math.Pow(boomState, 2) < 1)

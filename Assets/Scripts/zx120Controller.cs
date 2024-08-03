@@ -5,7 +5,7 @@ using Unity.Robotics.ROSTCPConnector;
 using RosMessageTypes.Std;
 using RosMessageTypes.Geometry;
 
-public class MyPublisher : MonoBehaviour
+public class zx120Controller : MonoBehaviour
 {
     ROSConnection ros;
     private float boomIncreaseCoefficient = 0.271f;
@@ -23,12 +23,12 @@ public class MyPublisher : MonoBehaviour
     private float bucketUpperLimit = Mathf.Deg2Rad * 143.0f;
     private float bucketLowerLimit = Mathf.Deg2Rad * -33f;
 
-    private float boomDirection = 0.0f;
-    private float swingDirection = 0.0f;
-    private float armDirection = 0.0f;
-    private float bucketDirection = 0.0f;
-    private float leftWheel = 0.0f;
-    private float rightWheel = 0.0f;
+    public static float boomDirection = 0.0f;
+    public static float swingDirection = 0.0f;
+    public static float armDirection = 0.0f;
+    public static float bucketDirection = 0.0f;
+    public static float leftWheel = 0.0f;
+    public static float rightWheel = 0.0f;
     private float translationVelocity = 2.5f;
     private float rotationVelocity = 2.0f;
 

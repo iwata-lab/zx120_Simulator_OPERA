@@ -28,8 +28,8 @@ public class LeftJoystickControlledImage : MonoBehaviour
 
     void Update()
     {
-        float armState = Input.GetAxis(joystickHorizontalAxis);
-        float swingState = Input.GetAxis(joystickVerticalAxis);
+        float armState = zx120Controller.armDirection;
+        float swingState = zx120Controller.swingDirection;
         Vector2 offset;
 
         if (Math.Pow(armState, 2) + Math.Pow(swingState, 2) < 1)
