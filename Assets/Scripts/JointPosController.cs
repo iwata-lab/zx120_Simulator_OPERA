@@ -34,11 +34,11 @@ public class JointPosController : MonoBehaviour
             targetPos.data = initTargetPos;
             drive.target = (float)(targetPos.data * Mathf.Rad2Deg);
             joint.xDrive = drive;
-            Debug.Log("drive : "+drive.target);
+            //Debug.Log("drive : "+drive.target);
         }
         else
         {
-            Debug.Log("No ArticulationBody are found");
+            //Debug.Log("No ArticulationBody are found");
         }
 
         ros.Subscribe<Float64Msg>(setpointTopicName, ExecuteJointPosControl);

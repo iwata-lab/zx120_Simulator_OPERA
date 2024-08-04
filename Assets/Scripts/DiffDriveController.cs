@@ -71,7 +71,7 @@ public class DiffDriveController : MonoBehaviour
             var body = left.GetComponent<WheelCollider>();
             body.ConfigureVehicleSubsteps(5f, 100, 100);
             leftWheelColliders.Add(body);
-            Debug.Log("Check left!");
+            //Debug.Log("Check left!");
 
             /* Get ArticulationBody-type Component named "left_middle_wheel_link" */
             if(left.name == "left_middle_wheel_link"){
@@ -85,7 +85,7 @@ public class DiffDriveController : MonoBehaviour
             var body = right.GetComponent<WheelCollider>();
             body.ConfigureVehicleSubsteps(5f, 100, 100);
             rightWheelColliders.Add(body);
-            Debug.Log("Check right!");
+            //Debug.Log("Check right!");
             
             /* Get ArticulationBody-type Component named "right_middle_wheel_link" */
             if(right.name == "right_middle_wheel_link"){
@@ -95,7 +95,7 @@ public class DiffDriveController : MonoBehaviour
         }
         tread_half = Mathf.Abs(leftWheels[0].transform.localPosition.x - rightWheels[0].transform.localPosition.x)/2;
 
-        Debug.Log("DiffDriveController starts!!");
+        //Debug.Log("DiffDriveController starts!!");
         ros.Subscribe<TwistMsg>(TwistTopicName, ExecuteTwist); //Register Subscriber
         ros.RegisterPublisher<OdometryMsg>(OdomTopicName); //Register Publisher
     }

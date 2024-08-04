@@ -1,25 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
- 
-public class CollisionSound1 : MonoBehaviour
-{
 
+public class CollisionSound : MonoBehaviour
+{
     private AudioSource audioSource;
-     
-    // Start is called before the first frame update
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
     }
- 
-    // Update is called once per frame
-    void Update()
+
+    public void PlaySound(Collider other)
     {
-         
-    }
-    void OnCollisionEnter(Collision collision)
-    {
-        audioSource.Play();     
+        //obstacleタグが付いているオブジェクトと衝突した場合に音を鳴らす
+        if (other.tag == "Obstacle")
+        {
+            audioSource.Play();
+        }
     }
 }
