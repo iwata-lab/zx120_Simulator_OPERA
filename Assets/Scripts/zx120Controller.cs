@@ -40,6 +40,14 @@ public class zx120Controller : MonoBehaviour
 
     public bool isKeyboardControl = false;
     public bool isControllerControl = false;
+    public bool isProControllerControl = false;
+
+    private bool functionSwitch = false;
+    private string functionSwitchButton = "joystick button 7";
+
+    public AudioClip switchSound;
+
+    public GameObject DriverCamera;
 
     Float64Msg boomMsg = new Float64Msg() { data = -0.70f };
     Float64Msg swingMsg = new Float64Msg() { data = 0.0f };
@@ -76,6 +84,8 @@ public class zx120Controller : MonoBehaviour
 
         if (isKeyboardControl) InputKeys();
         if (isControllerControl) InputControllers();
+        if (isProControllerControl) InputProControllers();
+
         UpdateAndPublishMessages();
 
     }
@@ -164,5 +174,24 @@ public class zx120Controller : MonoBehaviour
         bucketDirection = Input.GetAxis("Joystick3Horizontal");
         leftWheel = Input.GetAxis("Joystick1Vertical1");
         rightWheel = Input.GetAxis("Joystick1Vertical2");
+    }
+
+    void InputProControllers()
+    {
+        if (Input.GetKeyDown(functionSwitchButton)){ functionSwitch = !functionSwitch;
+            AudioSource.PlayClipAtPoint(switchSound, DriverCamera.transform.position);
+        }
+        if (functionSwitch)
+        {
+            boomDirection = Input.GetAxis("ProJoystick1Vertical2");
+            swingDirection = -Input.GetAxis("ProJoystick1Vertical1");
+            armDirection = -Input.GetAxis("Joystick1Vertical1");
+            bucketDirection = -Input.GetAxis("ProJoystick1Horizontal2");
+        }
+        else
+        {
+            leftWheel = Input.GetAxis("ProJoystick1Vertical1");
+            rightWheel = Input.GetAxis("ProJoystick1Vertical2");
+        }
     }
 }

@@ -23,7 +23,7 @@ public class BallGenerator : MonoBehaviour
     private void Update()
     {
         if (time >= 0.0f) time += Time.deltaTime;
-        if (time > 6.0f)
+        if (time > 3.0f)
         {
             GenerateBalls();
             time = -1.0f;

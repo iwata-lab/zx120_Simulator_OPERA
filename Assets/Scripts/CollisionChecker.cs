@@ -28,7 +28,7 @@ public class collisionChecker : MonoBehaviour
         //タグがObstacleのオブジェクトと衝突した場合にログを出力
         if (collision.collider.tag == "Obstacle")
         {
-            Debug.Log("Obstacle detected: " + this.name);
+            //Debug.Log("Obstacle detected: " + this.name);
         }
     }
 }
