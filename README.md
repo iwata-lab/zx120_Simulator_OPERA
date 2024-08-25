@@ -94,10 +94,4 @@ ROS用のPCをもう一台用意する方法を説明します．
 更新予定...
 
 
-# 製作
-早稲田大学　岩田浩康研究室　災害対応班  
-山下侑輝　伊藤悠翔　岩田浩康  
-お問い合わせ：cog-ml@iwata.mech.waseda.ac.jp
 
-This simulator includes the work that is distributed in the Apache License 2.0.  
-このシミュレータは、 Apache 2.0ライセンスで配布されている製作物が含まれています。
