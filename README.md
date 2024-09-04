@@ -33,7 +33,7 @@ https://github.com/user-attachments/assets/594ff280-bc0f-40fd-80a2-77bc051fcb2c
 https://www.pwri.go.jp/jpn/results/report/report-project/2013/pdf/pro-2-7.pdf
 
 ## 掘削作業
-土砂に見立てたボールプールを作成し，掘削積込のタスクを設定しました．zx120から多くの土砂を積み上げ，ダンプに積み込むまでを一連のタスクとしています．
+土砂に見立てたボールプールを作成し，掘削積込のタスクを設定しました．zx120から多くの土砂を積み上げ，ダンプに積み込むまでを一連のタスクとしています．`BallGenerator`というオブジェクトのスクリプトのオンオフで管理しています．処理が非常に重いので再生時に数秒のカクツキが起きます．動作がスムーズにいかない場合はスクリプトをオフにしてください．
 
 https://github.com/user-attachments/assets/2b3dbe2b-4023-41fe-b112-999f9a82d218
 
